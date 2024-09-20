@@ -12,14 +12,14 @@ services:
     networks:
       - golps
 
-  redis:
-    image: redis:latest
-    container_name: redis
-    restart: always
-    env_file:
-      - .env
-    networks:
-      - golps
+  # redis:
+  #   image: redis:latest
+  #   container_name: redis
+  #   restart: always
+  #   env_file:
+  #     - .env
+  #   networks:
+  #     - golps
 
 networks:
   golps:

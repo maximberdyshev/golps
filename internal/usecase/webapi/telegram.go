@@ -18,10 +18,10 @@ import (
 )
 
 const (
-	errSendText          = "error: sending text message"
-	errSendTextAndMarkup = "error: sending text message and inline markup"
-	errCacthCallback     = "error: catching callback"
-	errToken             = "error: missing or invalid token"
+	errSendText           = "can't send text message"
+	errSendTextWithMarkup = "can't send text message with inline markup"
+	errCacthCallback      = "can't catch callback"
+	errToken              = "missing or invalid token"
 )
 
 type (
@@ -147,7 +147,7 @@ func (w *WebAPI) NewText(m entity.Message, withMarkup bool) error {
 
 	if _, err := w.Send(msg); err != nil {
 		if withMarkup {
-			return fmt.Errorf("%s: %w", errSendTextAndMarkup, err)
+			return fmt.Errorf("%s: %w", errSendTextWithMarkup, err)
 		}
 		return fmt.Errorf("%s: %w", errSendText, err)
 	}
@@ -157,7 +157,7 @@ func (w *WebAPI) NewText(m entity.Message, withMarkup bool) error {
 func (w *WebAPI) EditTextAndMarkup(m entity.Message) error {
 	msg := tgbotapi.NewEditMessageTextAndMarkup(m.ChatID, *m.MessageID, m.Text, w.inlineMarkup(*m.Markup))
 	if _, err := w.Send(msg); err != nil {
-		return fmt.Errorf("%s: %w", errSendTextAndMarkup, err)
+		return fmt.Errorf("%s: %w", errSendTextWithMarkup, err)
 	}
 	return nil
 }

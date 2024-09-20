@@ -10,20 +10,21 @@ import (
 )
 
 type Logger struct {
+	Mode        string
 	KibanaHost  string
 	KibanaPort  string
 	KibanaIndex string
 }
 
-func New(l *Logger, mode string) (logger *zap.Logger, err error) {
-	switch mode {
+func New(l *Logger) (logger *zap.Logger, err error) {
+	switch l.Mode {
 	case "debug": // all err stacktrace
 		logger, err = zap.NewDevelopment()
 		if err != nil {
 			return nil, err
 		}
 
-	case "dev": // only fatal stacktrace
+	case "dev", "stage": // only fatal stacktrace
 		logger, err = zap.NewDevelopment(zap.AddStacktrace(zapcore.FatalLevel))
 		if err != nil {
 			return nil, err

@@ -16,12 +16,13 @@ type (
 	}
 
 	App struct {
-		Name    string `env-required:"true" yaml:"name" env:"APP_NAME"`
-		Version string `enb-required:"true" yaml:"version" env:"APP_VERSION"`
-		Mode    string `env-required:"true" yaml:"mode" env:"MODE"`
+		Name        string `env-required:"true" yaml:"name" env:"APP_NAME"`
+		Version     string `enb-required:"true" yaml:"version" env:"APP_VERSION"`
+		Environment string `env-required:"true" yaml:"environment" env:"ENVIRONMENT"`
 	}
 
 	Logger struct {
+		Mode        string `yaml:"mode" env:"LOGGER_MODE"`
 		KibanaHost  string `yaml:"kibana_host" env:"LOGGER_KIBANA_HOST"`
 		KibanaPort  string `yaml:"kibana_port" env:"LOGGER_KIBANA_PORT"`
 		KibanaIndex string `yaml:"kibana_index" env:"LOGGER_KIBANA_INDEX"`
@@ -44,7 +45,7 @@ func New() (*Config, error) {
 		return nil, err
 	}
 
-	if cfg.App.Mode != "prod" {
+	if cfg.App.Environment == "dev" {
 		if err := godotenv.Load(); err != nil {
 			return nil, err
 		}

@@ -12,22 +12,22 @@ import (
 )
 
 func main() {
-	srcFile := "app/main.go"
+	srcFile := "golps/main.go"
 
 	cfg, err := config.New()
 	if err != nil {
-		fmt.Printf("%s    ERROR    %s:21  %v\n", curTime(), srcFile, err)
+		fmt.Printf("%s\tERROR\t%s:19\t%v\n", curTime(), srcFile, err)
 		os.Exit(1)
 	}
-	fmt.Printf("%s    INFO    %s:24  Config loaded\n", curTime(), srcFile)
+	fmt.Printf("%s\tINFO\t%s:22\tConfig loaded\n", curTime(), srcFile)
 
-	zapLogger, err := logger.New((*logger.Logger)(&cfg.Logger), cfg.App.Mode)
+	zapLogger, err := logger.New((*logger.Logger)(&cfg.Logger))
 	if err != nil {
-		fmt.Printf("%s    ERROR    %s:29  %v\n", curTime(), srcFile, err)
+		fmt.Printf("%s\tERROR\t%s:26\t%v\n", curTime(), srcFile, err)
 		os.Exit(1)
 	}
 	defer zapLogger.Sync()
-	fmt.Printf("%s    INFO    %s:33  Logger initialized\n", curTime(), srcFile)
+	fmt.Printf("%s\tINFO\t%s:30\tLogger initialized\n", curTime(), srcFile)
 
 	ctx := context.Background()
 	ctx = config.ToContext(ctx, cfg)
