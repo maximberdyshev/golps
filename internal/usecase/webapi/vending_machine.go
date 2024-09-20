@@ -1,7 +1,8 @@
-package states
+package webapi
+
+// TODO: move to usecase ?
 
 import (
-	"golearnpatternstate/consumer"
 	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -36,7 +37,7 @@ func NewVendingMachine(itemCount, itemPrice int) *VendingMachine {
 		vendingMachine: v,
 	}
 
-	// default state
+	// INFO: default state
 	v.SetState(hasItemState, "hasItemState")
 
 	v.HasItem = hasItemState
@@ -46,23 +47,23 @@ func NewVendingMachine(itemCount, itemPrice int) *VendingMachine {
 	return v
 }
 
-func (v *VendingMachine) AddItem(count int, bot *consumer.Consumer, update tgbotapi.Update) {
+func (v *VendingMachine) AddItem(count int, bot WebAPI, update tgbotapi.Update) {
 	v.currentState.addItem(count, bot, update)
 }
 
-func (v *VendingMachine) RequestItem(bot *consumer.Consumer, update tgbotapi.Update) {
+func (v *VendingMachine) RequestItem(bot WebAPI, update tgbotapi.Update) {
 	v.currentState.requestItem(bot, update)
 }
 
-func (v *VendingMachine) InsertMoney(money int, bot *consumer.Consumer, update tgbotapi.Update) {
+func (v *VendingMachine) InsertMoney(money int, bot WebAPI, update tgbotapi.Update) {
 	v.currentState.insertMoney(money, bot, update)
 }
 
-func (v *VendingMachine) DispenseItem(bot *consumer.Consumer, update tgbotapi.Update) {
+func (v *VendingMachine) DispenseItem(bot WebAPI, update tgbotapi.Update) {
 	v.currentState.dispenseItem(bot, update)
 }
 
-func (v *VendingMachine) Exit(bot *consumer.Consumer, update tgbotapi.Update) {
+func (v *VendingMachine) Exit(bot WebAPI, update tgbotapi.Update) {
 	v.currentState.exit(bot, update)
 }
 

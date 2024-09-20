@@ -1,0 +1,13 @@
+app:
+  name: go-learn-pattern-state
+  version: "1.0.0"
+  mode: dev
+
+logger:
+  kibana_host: "0.0.0.0"
+  kibana_port: "5601"
+  kibana_index: go-learn-pattern-state
+
+redis:
+
+telegram:

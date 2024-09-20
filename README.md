@@ -1,5 +1,6 @@
-1. move to root in project directory (example: cd /home/user/this_project_name)
-2. create .env file: touch .env
-3. add to .env file: your bot-token and your tgID
-4. add dependency: go mod tidy
-5. start bot command: go run .
+1. Move to root in project directory ``(example: cd /home/user/example_project_name)``;
+2. Create .env file: ``touch .env``;
+3. Add to .env file your bot-token and your tg_id;
+4. Check ./config/config.yml file;
+5. Install pkg: ``go mod download``;
+6. Rtart bot command: ``go run ./cmd/app``;
